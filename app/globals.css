@@ -1,0 +1,358 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 高級感を演出するカスタムプロパティ */
+:root {
+    --gold-primary: #D4AF37;
+    --gold-secondary: #B8860B;
+    --gold-accent: #FFD700;
+    --dark-blue: #1a1a2e;
+    --luxury-gray: #2c2c2c;
+    --cream: #faf9f6;
+}
+
+/* 背景シフトアニメーション */
+@keyframes backgroundShift {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    25% {
+        transform: translateX(-10px) translateY(-10px);
+    }
+
+    50% {
+        transform: translateX(10px) translateY(-5px);
+    }
+
+    75% {
+        transform: translateX(-5px) translateY(10px);
+    }
+}
+
+/* パーティクルアニメーション */
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* テキストグラデーションアニメーション */
+@keyframes textGradient {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ゴールドグラデーションアニメーション */
+@keyframes goldShimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* 高級感のあるホバー効果 */
+.luxury-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.luxury-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.luxury-hover:hover::before {
+    left: 100%;
+}
+
+.luxury-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+}
+
+/* ガラスモーフィズム効果（高級版） */
+.luxury-glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ゴールドボーダー効果 */
+.gold-border {
+    position: relative;
+}
+
+.gold-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-accent), var(--gold-primary));
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.gold-border:hover::after {
+    width: 100%;
+}
+
+/* 高級感のあるボタン */
+.luxury-button {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    border: none;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.luxury-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.luxury-button:hover::before {
+    left: 100%;
+}
+
+.luxury-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* 高級感のあるカード */
+.luxury-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.luxury-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* ゴールドテキスト効果 */
+.gold-text {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-accent), var(--gold-primary));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmer 3s ease-in-out infinite;
+}
+
+/* 高級感のあるスクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold-primary), var(--gold-secondary));
+    border-radius: 5px;
+    border: 2px solid var(--cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gold-accent), var(--gold-primary));
+}
+
+/* 高級感のあるスクロールインジケーター */
+.luxury-scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-accent), var(--gold-primary));
+    background-size: 200% 100%;
+    transform-origin: left;
+    z-index: 1000;
+    animation: goldShimmer 2s ease-in-out infinite;
+}
+
+/* 高級感のあるパーティクル */
+.luxury-particle {
+    background: radial-gradient(circle, var(--gold-accent), transparent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* 高級感のあるタイポグラフィ */
+.luxury-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.luxury-subheading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+}
+
+/* 高級感のあるアイコン */
+.luxury-icon {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.luxury-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* 高級感のある背景パターン */
+.luxury-pattern {
+    background-image:
+        radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
+        linear-gradient(45deg, transparent 40%, rgba(212, 175, 55, 0.05) 50%, transparent 60%);
+    background-size: 100% 100%, 100% 100%, 200px 200px;
+    animation: backgroundShift 30s ease-in-out infinite;
+}
+
+/* 高級感のあるフォーム */
+.luxury-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.luxury-input:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 高級感のあるセレクトボックス */
+.luxury-select {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+.luxury-select:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+/* 高級感のあるテキストエリア */
+.luxury-textarea {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+}
+
+.luxury-textarea:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+/* 高級感のあるチェックボックス */
+.luxury-checkbox {
+    accent-color: var(--gold-primary);
+    transform: scale(1.2);
+    margin-right: 8px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .luxury-heading {
+        font-size: 1.75rem;
+    }
+
+    .luxury-card {
+        margin: 0 1rem;
+    }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cream: #1a1a1a;
+        --luxury-gray: #f5f5f5;
+    }
+
+    .luxury-card {
+        background: rgba(26, 26, 26, 0.95);
+        border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    .luxury-input,
+    .luxury-select,
+    .luxury-textarea {
+        background: rgba(26, 26, 26, 0.9);
+        color: white;
+    }
+}
