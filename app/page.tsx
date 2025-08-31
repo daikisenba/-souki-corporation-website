@@ -156,10 +156,8 @@ const TechCard = ({ icon: Icon, title, description, delay }: {
 // 時間表示コンポーネント
 const ClockDisplay = () => {
     const [time, setTime] = useState<string>('');
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const updateTime = () => {
             const now = new Date();
             setTime(now.toLocaleTimeString('ja-JP', {
@@ -170,19 +168,15 @@ const ClockDisplay = () => {
             }));
         };
 
-        updateTime(); // 初期表示
+        updateTime(); // 即座に初期表示
         const timer = setInterval(updateTime, 1000);
 
         return () => clearInterval(timer);
     }, []);
 
-    if (!mounted) {
-        return <span className="font-mono">--:--:--</span>;
-    }
-
     return (
         <span className="font-mono">
-            {time}
+            {time || '00:00:00'}
         </span>
     );
 };
@@ -190,10 +184,8 @@ const ClockDisplay = () => {
 // 日付表示コンポーネント
 const TimeDisplay = () => {
     const [date, setDate] = useState<string>('');
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const updateDate = () => {
             const now = new Date();
             setDate(now.toLocaleDateString('ja-JP', {
@@ -204,19 +196,15 @@ const TimeDisplay = () => {
             }));
         };
 
-        updateDate(); // 初期表示
+        updateDate(); // 即座に初期表示
         const timer = setInterval(updateDate, 1000);
 
         return () => clearInterval(timer);
     }, []);
 
-    if (!mounted) {
-        return <span className="font-medium">----年--月--日 --曜日</span>;
-    }
-
     return (
         <span className="font-medium">
-            {date}
+            {date || '2025年1月1日 水曜日'}
         </span>
     );
 };
@@ -246,7 +234,7 @@ export default function Home() {
 
             {/* ヘッダー */}
             <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-blue-100/50">
-                <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -254,19 +242,27 @@ export default function Home() {
                         className="flex items-center justify-between"
                     >
                         <div className="flex items-center">
-                            <h1 className="text-xl font-bold text-blue-700">株式会社想樹</h1>
+                            <h1 className="text-lg md:text-xl font-bold text-blue-700">株式会社想樹</h1>
                         </div>
                         <nav className="hidden md:flex items-center space-x-8">
                             <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors">事業内容</a>
                             <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">お問い合わせ</a>
                         </nav>
+                        {/* モバイルメニューボタン */}
+                        <div className="md:hidden">
+                            <button className="text-gray-600 hover:text-blue-600 transition-colors">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
                     </motion.div>
                 </div>
             </header>
 
             <motion.main
                 style={{ backgroundColor }}
-                className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-2 md:px-0 pt-20"
+                className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-2 md:px-0 pt-16 md:pt-20"
             >
                 {/* 動的パーティクル背景 */}
                 <ParticleBackground />
@@ -306,15 +302,15 @@ export default function Home() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="relative z-10 max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-24 items-center w-full"
+                    className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center w-full"
                 >
                     {/* 左：テキスト＋ガラスモーフ */}
-                    <div className="backdrop-blur-lg bg-white/10 ring-1 ring-white/15 rounded-2xl p-8 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] space-y-3">
+                    <div className="backdrop-blur-lg bg-white/10 ring-1 ring-white/15 rounded-2xl p-4 md:p-8 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] space-y-3">
                         <motion.h1
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,4vw,48px)] tracking-tight leading-snug whitespace-nowrap"
+                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(24px,6vw,48px)] tracking-tight leading-snug"
                         >
                             <TypewriterText text="成長の道を、共に歩むパートナー" />
                         </motion.h1>
@@ -322,7 +318,7 @@ export default function Home() {
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-lg md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug"
+                            className="text-base md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug"
                         >
                             変化を力に変える伴走者
                         </motion.h2>
@@ -330,7 +326,7 @@ export default function Home() {
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="text-base md:text-lg text-gray-700 mb-6 font-sans text-relaxed"
+                            className="text-sm md:text-lg text-gray-700 mb-6 font-sans leading-relaxed"
                         >
                             公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。
                         </motion.p>
@@ -338,7 +334,7 @@ export default function Home() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
-                            className="flex gap-4 mt-4"
+                            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4"
                         >
                             <motion.a
                                 whileHover={{
@@ -349,7 +345,9 @@ export default function Home() {
                                 whileTap={{ scale: 0.95 }}
                                 href="#contact"
                                 aria-label="無料相談フォームへ（24時間以内に返信）"
-                                className="rounded-xl px-6 py-3 bg-white text-blue-700 font-semibold shadow-lg hover:bg-blue-100 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2"
+                                className="rounded-xl px-4 md:px-6 py-3 bg-white text-blue-700 font-semibold shadow-lg hover:bg-blue-100 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base"
+                                role="button"
+                                tabIndex={0}
                             >
                                 無料相談（24時間以内に返信）
                             </motion.a>
@@ -362,7 +360,7 @@ export default function Home() {
                                 whileTap={{ scale: 0.95 }}
                                 href="#services"
                                 aria-label="サービス詳細へ"
-                                className="rounded-xl px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2"
+                                className="rounded-xl px-4 md:px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base"
                             >
                                 サービス詳細
                             </motion.a>
@@ -374,21 +372,21 @@ export default function Home() {
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="flex justify-center items-center transform-gpu will-change-transform md:block hidden"
+                        className="flex justify-center items-center transform-gpu will-change-transform"
                     >
-                        <div className="relative ml-16 mt-24">
+                        <div className="relative md:ml-16 md:mt-24 mt-8">
                             {/* 背景の円形グラデーション */}
                             <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-pink-400/20 rounded-full blur-xl animate-pulse"></div>
 
                             {/* メインの時間表示コンテナ */}
-                            <div className="relative bg-white/20 backdrop-blur-md rounded-3xl p-8 border border-white/30 shadow-2xl">
-                                <div className="text-center space-y-4">
+                            <div className="relative bg-white/20 backdrop-blur-md rounded-3xl p-4 md:p-8 border border-white/30 shadow-2xl">
+                                <div className="text-center space-y-3 md:space-y-4">
                                     {/* 日付表示 */}
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6, delay: 0.6 }}
-                                        className="text-blue-900 text-sm font-medium tracking-wider"
+                                        className="text-blue-900 text-xs md:text-sm font-medium tracking-wider"
                                     >
                                         <TimeDisplay />
                                     </motion.div>
@@ -398,7 +396,7 @@ export default function Home() {
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.8, delay: 0.8 }}
-                                        className="text-4xl md:text-5xl font-bold text-blue-800 tracking-tight"
+                                        className="text-2xl md:text-4xl lg:text-5xl font-bold text-blue-800 tracking-tight"
                                     >
                                         <ClockDisplay />
                                     </motion.div>
@@ -408,7 +406,7 @@ export default function Home() {
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.6, delay: 1.0 }}
-                                        className="text-blue-700 text-sm font-medium"
+                                        className="text-blue-700 text-xs md:text-sm font-medium"
                                     >
                                         最新技術で常に進化
                                     </motion.div>
