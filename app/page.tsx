@@ -9,7 +9,6 @@ import Image from "next/image";
 import Link from "next/link";
 // Lucideアイコン（線アイコン）利用
 import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Bot, Users, Code, Cpu, Database, Globe, Zap } from "lucide-react";
-import FlowEfficiencyPanel from "./components/FlowEfficiencyPanel";
 
 // パーティクルコンポーネント
 const ParticleBackground = () => {
@@ -154,6 +153,74 @@ const TechCard = ({ icon: Icon, title, description, delay }: {
     );
 };
 
+// 時間表示コンポーネント
+const ClockDisplay = () => {
+    const [time, setTime] = useState<string>('');
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const updateTime = () => {
+            const now = new Date();
+            setTime(now.toLocaleTimeString('ja-JP', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }));
+        };
+
+        updateTime(); // 初期表示
+        const timer = setInterval(updateTime, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    if (!mounted) {
+        return <span className="font-mono">--:--:--</span>;
+    }
+
+    return (
+        <span className="font-mono">
+            {time}
+        </span>
+    );
+};
+
+// 日付表示コンポーネント
+const TimeDisplay = () => {
+    const [date, setDate] = useState<string>('');
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const updateDate = () => {
+            const now = new Date();
+            setDate(now.toLocaleDateString('ja-JP', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            }));
+        };
+
+        updateDate(); // 初期表示
+        const timer = setInterval(updateDate, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    if (!mounted) {
+        return <span className="font-medium">----年--月--日 --曜日</span>;
+    }
+
+    return (
+        <span className="font-medium">
+            {date}
+        </span>
+    );
+};
+
 export default function Home() {
     // パララックス用（md以上のみ有効化）
     const { scrollY } = useScroll();
@@ -239,7 +306,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="relative z-10 max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8 items-center w-full"
+                    className="relative z-10 max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-24 items-center w-full"
                 >
                     {/* 左：テキスト＋ガラスモーフ */}
                     <div className="backdrop-blur-lg bg-white/10 ring-1 ring-white/15 rounded-2xl p-8 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] space-y-3">
@@ -247,7 +314,7 @@ export default function Home() {
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,4vw,48px)] tracking-tight leading-snug"
+                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,4vw,48px)] tracking-tight leading-snug whitespace-nowrap"
                         >
                             <TypewriterText text="成長の道を、共に歩むパートナー" />
                         </motion.h1>
@@ -302,16 +369,64 @@ export default function Home() {
                         </motion.div>
                     </div>
 
-                    {/* 右：インタラクティブな技術要素 */}
+                    {/* 右：お洒落な時間表示 */}
                     <motion.div
-                        style={{ y }}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
                         className="flex justify-center items-center transform-gpu will-change-transform md:block hidden"
                     >
-                        <FlowEfficiencyPanel
-                            cycleMs={8000}
-                            phrase="AIで業務が流れに変わる"
-                            sub="混乱を整理し、業務スピードを加速。"
-                        />
+                        <div className="relative ml-16 mt-24">
+                            {/* 背景の円形グラデーション */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-pink-400/20 rounded-full blur-xl animate-pulse"></div>
+
+                            {/* メインの時間表示コンテナ */}
+                            <div className="relative bg-white/20 backdrop-blur-md rounded-3xl p-8 border border-white/30 shadow-2xl">
+                                <div className="text-center space-y-4">
+                                    {/* 日付表示 */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.6, delay: 0.6 }}
+                                        className="text-blue-900 text-sm font-medium tracking-wider"
+                                    >
+                                        <TimeDisplay />
+                                    </motion.div>
+
+                                    {/* 時間表示 */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.8, delay: 0.8 }}
+                                        className="text-4xl md:text-5xl font-bold text-blue-800 tracking-tight"
+                                    >
+                                        <ClockDisplay />
+                                    </motion.div>
+
+                                    {/* 技術力アピールテキスト */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.6, delay: 1.0 }}
+                                        className="text-blue-700 text-sm font-medium"
+                                    >
+                                        最新技術で常に進化
+                                    </motion.div>
+
+                                    {/* 装飾的な要素 */}
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                        className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-60"
+                                    />
+                                    <motion.div
+                                        animate={{ rotate: -360 }}
+                                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                                        className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
                 </motion.section>
 
@@ -476,10 +591,10 @@ export default function Home() {
                                 >
                                     <Bot className="w-6 h-6 text-blue-600" />
                                 </motion.div>
-                                <h3 className="text-xl font-bold text-blue-700">AI活用サービス</h3>
+                                <h3 className="text-xl font-bold text-blue-700">営業業務の効率化</h3>
                             </div>
                             <p className="text-gray-700 mb-6 flex-grow">
-                                最新の生成AI技術を活用し、企業の業務効率化や新規ビジネスの創出を支援しています。チャットボットによる顧客対応の自動化、ドキュメントの要約や翻訳など、幅広いユースケースに対応可能です。
+                                最新のAI技術を活用し、営業活動の効率化と売上向上を実現します。顧客データの分析、リード管理の自動化、営業活動の最適化により、営業チームの生産性を大幅に向上させます。
                             </p>
                             <div className="space-y-3 text-sm text-gray-600">
                                 <motion.div
@@ -490,7 +605,7 @@ export default function Home() {
                                     className="flex items-start"
                                 >
                                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>チャットボットによる顧客対応自動化</span>
+                                    <span>顧客データ分析による営業戦略立案</span>
                                 </motion.div>
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}
@@ -500,7 +615,7 @@ export default function Home() {
                                     className="flex items-start"
                                 >
                                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>ドキュメントの要約・翻訳</span>
+                                    <span>リード管理の自動化・効率化</span>
                                 </motion.div>
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}
@@ -510,7 +625,7 @@ export default function Home() {
                                     className="flex items-start"
                                 >
                                     <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>業務フローに合わせた最適化</span>
+                                    <span>営業活動の最適化と売上向上支援</span>
                                 </motion.div>
                             </div>
                             <motion.a
