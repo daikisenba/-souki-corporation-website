@@ -1,0 +1,17 @@
+"use client";
+import { motion } from "framer-motion";
+
+export default function Hero() {
+  return (
+    <section className="container mx-auto py-12">
+      <motion.h1
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-3xl font-bold text-center"
+      >
+        成長の道を共に歩むパートナー
+      </motion.h1>
+    </section>
+  );
+}
