@@ -1,9 +1,6 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
-import ScrollRevealText from "./ScrollRevealText";
 
 export default function Hero() {
   return (
@@ -16,10 +13,9 @@ export default function Hero() {
             <Sparkles className="h-3.5 w-3.5" /> 生成AIで、業務はもっと軽く
           </span>
 
-          <ScrollRevealText
-            text="信頼と革新で未来を創る"
-            className="text-4xl md:text-5xl font-bold leading-tight"
-          />
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            信頼と革新で未来を創る
+          </h1>
 
           {/* 成長の道を、共に歩むパートナー - モバイル版でも一行になるよう字のサイズ調整 */}
           <h2 className="text-base sm:text-lg md:text-xl font-semibold text-slate-700 leading-tight">
@@ -31,18 +27,22 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-3">
-            <Button asChild size="lg"><Link href="/contact">無料相談</Link></Button>
-            <Button asChild variant="outline" size="lg"><Link href="/demos">デモを見る</Link></Button>
+            <Link href="/contact" className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
+              無料相談
+            </Link>
+            <Link href="/demos" className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8">
+              デモを見る
+            </Link>
           </div>
         </div>
 
         <div className="grid gap-4">
-          <Card className="p-6 bg-white/80 backdrop-blur border rounded-2xl">
+          <div className="p-6 bg-white/80 backdrop-blur border rounded-2xl">
             <div className="text-sm grid gap-2">
               <div><strong>例：</strong> 問い合わせ一次対応の自動化 / 議事録要約とタスク抽出 / 見積・帳票の下書き生成</div>
               <div className="text-slate-500">スモールスタート → 効果検証 → 本格導入の流れで安心です。</div>
             </div>
-          </Card>
+          </div>
           <div className="relative w-full h-56 md:h-64 rounded-2xl overflow-hidden border">
             {/* 抽象イラスト/図解/写真 どれでもOK：あとで差し替え */}
             <Image src="/hero-abstract.png" alt="業務効率化イメージ" fill className="object-cover" />
