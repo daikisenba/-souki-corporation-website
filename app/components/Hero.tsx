@@ -1,7 +1,6 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import ClockCard from "./ClockCard";
 
 export default function Hero() {
   return (
@@ -16,13 +15,17 @@ export default function Hero() {
             <Sparkles className="h-3.5 w-3.5" /> 生成AIで、業務はもっと軽く
           </span>
 
-          <h1 className="text-3xl md:text-6xl font-extrabold leading-tight tracking-tight text-slate-800">
-            成長の道を、共に歩むパートナー
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            信頼と革新で未来を創る
           </h1>
 
-          <p className="text-slate-600 md:text-lg">
-            変化を力に変える伴走者。公共事業の確実性と生成AIによる効率化を両立し、
-            信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。
+          {/* 成長の道を、共に歩むパートナー - モバイル版でも一行になるよう字のサイズ調整 */}
+          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-slate-700 leading-tight">
+            成長の道を、共に歩むパートナー
+          </h2>
+
+          <p className="text-slate-600">
+            公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。
           </p>
 
           <div className="flex gap-3">
@@ -35,8 +38,17 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="md:justify-self-end w-full max-w-md">
-          <ClockCard />
+        <div className="grid gap-4">
+          <div className="p-6 bg-white/80 backdrop-blur border rounded-2xl">
+            <div className="text-sm grid gap-2">
+              <div><strong>例：</strong> 問い合わせ一次対応の自動化 / 議事録要約とタスク抽出 / 見積・帳票の下書き生成</div>
+              <div className="text-slate-500">スモールスタート → 効果検証 → 本格導入の流れで安心です。</div>
+            </div>
+          </div>
+          <div className="relative w-full h-56 md:h-64 rounded-2xl overflow-hidden border">
+            {/* 抽象イラスト/図解/写真 どれでもOK：あとで差し替え */}
+            <Image src="/hero-abstract.png" alt="業務効率化イメージ" fill className="object-cover" />
+          </div>
         </div>
       </div>
     </section>
