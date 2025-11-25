@@ -8,7 +8,7 @@ import Image from "next/image";
 // Next.jsのルーティング
 import Link from "next/link";
 // Lucideアイコン（線アイコン）利用
-import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Bot, Users, Code, Cpu, Database, Globe, Zap } from "lucide-react";
+import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Bot, Users, Code, Cpu, Database, Globe, Zap, CheckCircle2 } from "lucide-react";
 
 // パーティクルコンポーネント
 const ParticleBackground = () => {
@@ -221,6 +221,41 @@ export default function Home() {
         [0, 1000],
         ["rgba(232, 241, 255, 1)", "rgba(255, 255, 255, 1)"]
     );
+
+    // ★追加：フォーム送信の状態管理
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // ★追加：フォーム送信処理
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        const form = e.currentTarget;
+        const data = new FormData(form);
+
+        try {
+            // Formspreeへの非同期送信
+            const response = await fetch("https://formspree.io/f/xzzqgapw", {
+                method: "POST",
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setIsSubmitted(true);
+                form.reset();
+            } else {
+                alert("送信に失敗しました。もう一度お試しください。");
+            }
+        } catch (error) {
+            alert("エラーが発生しました。");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <>
@@ -789,29 +824,72 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 問い合わせフォームセクション */}
+                {/* 問い合わせフォームセクション（ここを更新しました！） */}
                 <section id="contact" className="w-full max-w-xl mx-auto py-10 md:py-16 px-2 md:px-4">
                     <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">無料相談・お問い合わせ</h3>
-                    <form action="https://formspree.io/f/xzzqgapw" method="POST" className="bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-6">
-                        <input type="text" name="company" placeholder="会社名" required className="border rounded px-4 py-2" />
-                        <input type="text" name="name" placeholder="ご担当者名" required className="border rounded px-4 py-2" />
-                        <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-2" />
-                        <input type="tel" name="phone" placeholder="電話番号（任意）" className="border rounded px-4 py-2" />
-                        <select name="category" required className="border rounded px-4 py-2">
-                            <option value="">相談区分を選択</option>
-                            <option value="助成金コンサルティング">助成金コンサルティング</option>
-                            <option value="公共事業入札支援">公共事業入札支援</option>
-                            <option value="AI活用サービス">AI活用サービス</option>
-                            <option value="その他">その他</option>
-                        </select>
-                        <textarea name="message" placeholder="ご相談内容" required className="border rounded px-4 py-2 min-h-[100px]" />
-                        <div className="flex items-center gap-2">
-                            <input type="checkbox" name="privacy" required />
-                            <span className="text-sm">プライバシーポリシーに同意します</span>
-                        </div>
-                        <button type="submit" className="bg-blue-700 text-white font-semibold px-6 md:px-8 py-3 rounded-full shadow self-center min-w-[180px] min-h-[44px] text-base md:text-lg">送信する</button>
-                    </form>
-                    <p className="text-xs text-gray-500 mt-4 text-center">送信内容は info@souki-cp.co.jp にメールで届きます。</p>
+                    <div className="bg-white/80 rounded-2xl shadow-lg p-8">
+                        <AnimatePresence mode="wait">
+                            {isSubmitted ? (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    className="text-center py-12 flex flex-col items-center justify-center space-y-6"
+                                >
+                                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                        <CheckCircle2 className="w-10 h-10 text-green-600" />
+                                    </div>
+                                    <h4 className="text-2xl font-bold text-blue-800">お問い合わせありがとうございます</h4>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        メッセージが無事に送信されました。<br />
+                                        内容を確認の上、24時間以内に担当者よりご連絡させていただきます。
+                                    </p>
+                                    <button
+                                        onClick={() => setIsSubmitted(false)}
+                                        className="mt-6 px-8 py-3 bg-blue-100 text-blue-700 font-semibold rounded-full hover:bg-blue-200 transition-colors"
+                                    >
+                                        フォームに戻る
+                                    </button>
+                                </motion.div>
+                            ) : (
+                                <motion.form
+                                    key="form"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    onSubmit={handleSubmit}
+                                    className="flex flex-col gap-6"
+                                >
+                                    <input type="text" name="company" placeholder="会社名" required className="border rounded px-4 py-2" />
+                                    <input type="text" name="name" placeholder="ご担当者名" required className="border rounded px-4 py-2" />
+                                    <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-2" />
+                                    <input type="tel" name="phone" placeholder="電話番号（任意）" className="border rounded px-4 py-2" />
+                                    <select name="category" required className="border rounded px-4 py-2">
+                                        <option value="">相談区分を選択</option>
+                                        <option value="助成金コンサルティング">助成金コンサルティング</option>
+                                        <option value="公共事業入札支援">公共事業入札支援</option>
+                                        <option value="営業業務の効率化">営業業務の効率化</option>
+                                        <option value="その他">その他</option>
+                                    </select>
+                                    <textarea name="message" placeholder="ご相談内容" required className="border rounded px-4 py-2 min-h-[100px]" />
+                                    <div className="flex items-center gap-2">
+                                        <input type="checkbox" name="privacy" required />
+                                        <span className="text-sm">プライバシーポリシーに同意します</span>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="bg-blue-700 text-white font-semibold px-6 md:px-8 py-3 rounded-full shadow self-center min-w-[180px] min-h-[44px] text-base md:text-lg hover:bg-blue-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isSubmitting ? '送信中...' : '送信する'}
+                                    </button>
+                                </motion.form>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                    {!isSubmitted && (
+                        <p className="text-xs text-gray-500 mt-4 text-center">送信内容は info@souki-cp.co.jp にメールで届きます。</p>
+                    )}
                 </section>
             </motion.main>
         </>
