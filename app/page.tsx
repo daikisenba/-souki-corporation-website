@@ -792,7 +792,7 @@ export default function Home() {
                 {/* 問い合わせフォームセクション */}
                 <section id="contact" className="w-full max-w-xl mx-auto py-10 md:py-16 px-2 md:px-4">
                     <h3 className="text-xl font-bold text-blue-700 mb-4 text-center">無料相談・お問い合わせ</h3>
-                    <form action="https://formspree.io/f/mnqkqgqv" method="POST" className="bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-6">
+                    <form action="https://formspree.io/f/xzzqgapw" method="POST" className="bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col gap-6">
                         <input type="text" name="company" placeholder="会社名" required className="border rounded px-4 py-2" />
                         <input type="text" name="name" placeholder="ご担当者名" required className="border rounded px-4 py-2" />
                         <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-2" />
