@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
+import Script from 'next/script' // 追加：Next.js用のスクリプト機能
 import './globals.css'
+
+// 取得したGoogleアナリティクスのID
+const GA_MEASUREMENT_ID = 'G-70TJY4VDYB'
 
 export const metadata: Metadata = {
     title: '株式会社想樹 - 成長の道を、共に歩むパートナー',
@@ -25,7 +29,8 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'ja_JP',
         siteName: '株式会社想樹',
-        url: 'https://souki-corporation-website.vercel.app',
+        // ▼ 修正：新しい独自ドメインに変更しました
+        url: 'https://www.souki-cp.co.jp',
         images: [
             {
                 url: '/og-image.jpg',
@@ -42,7 +47,8 @@ export const metadata: Metadata = {
         images: ['/og-image.jpg'],
     },
     alternates: {
-        canonical: 'https://souki-corporation-website.vercel.app',
+        // ▼ 修正：新しい独自ドメインに変更しました
+        canonical: 'https://www.souki-cp.co.jp',
     },
 }
 
@@ -63,21 +69,20 @@ export default function RootLayout({
             </head>
             <body className="antialiased">
                 {children}
-                {/* Google Analytics 4 */}
-                <script
-                    async
-                    src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+
+                {/* ▼ Google Analytics 4 の設定 (Next.js推奨の書き方) */}
+                <Script
+                    src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+                    strategy="afterInteractive"
                 />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-XXXXXXXXXX');
-                        `,
-                    }}
-                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '${GA_MEASUREMENT_ID}');
+                    `}
+                </Script>
             </body>
         </html>
     )
