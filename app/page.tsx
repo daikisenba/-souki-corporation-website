@@ -830,7 +830,7 @@ export default function Home() {
                                 <li>創業：2024年3月</li>
                                 <li>所在地：東京都世田谷区松原5-58-17</li>
                                 <li>代表取締役：千羽 太樹</li>
-                                <li>メール：info@souki-cp.co.jp</li>
+                                <li>メール：d.senba@souki-cp.co.jp</li>
                             </ul>
                         </motion.div>
                     </div>
@@ -875,7 +875,6 @@ export default function Home() {
                                     <input type="text" name="company" placeholder="会社名" required className="border rounded px-4 py-2" />
                                     <input type="text" name="name" placeholder="ご担当者名" required className="border rounded px-4 py-2" />
                                     <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-2" />
-                                    <input type="tel" name="phone" placeholder="電話番号（任意）" className="border rounded px-4 py-2" />
                                     <select name="category" required className="border rounded px-4 py-2">
                                         <option value="">相談区分を選択</option>
                                         <option value="助成金コンサルティング">助成金コンサルティング</option>
@@ -901,7 +900,7 @@ export default function Home() {
                         </AnimatePresence>
                     </div>
                     {!isSubmitted && (
-                        <p className="text-xs text-gray-500 mt-4 text-center">送信内容は info@souki-cp.co.jp にメールで届きます。</p>
+                        <p className="text-xs text-gray-500 mt-4 text-center">送信内容は d.senba@souki-cp.co.jp にメールで届きます。</p>
                     )}
                 </section>
             </motion.main>

@@ -190,7 +190,7 @@ export default function BrochurePage() {
                         </p>
                         <div className="text-sm space-y-1">
                             <p>Web：souki-cp.co.jp/nyusatsu-hisho</p>
-                            <p>Mail：info@souki-cp.co.jp</p>
+                            <p>Mail：d.senba@souki-cp.co.jp</p>
                             <p className="text-blue-200 text-xs">（お問い合わせはメールのみで承ります）</p>
                         </div>
                     </div>

@@ -329,7 +329,6 @@ export default function NyusatsuLp() {
                                     <input type="text" name="company" placeholder="会社名" required className="border rounded px-4 py-3" />
                                     <input type="text" name="name" placeholder="ご担当者名" required className="border rounded px-4 py-3" />
                                     <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-3" />
-                                    <input type="tel" name="phone" placeholder="電話番号（任意）" className="border rounded px-4 py-3" />
                                     <select name="希望内容" required className="border rounded px-4 py-3 text-gray-700">
                                         <option value="">ご希望を選択</option>
                                         <option value="資料請求">資料請求</option>
