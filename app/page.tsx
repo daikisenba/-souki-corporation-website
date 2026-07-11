@@ -281,6 +281,7 @@ export default function Home() {
                         </div>
                         <nav className="hidden md:flex items-center space-x-8">
                             <a href="#services" className="text-gray-600 hover:text-blue-600 transition-colors">事業内容</a>
+                            <Link href="/column" className="text-gray-600 hover:text-blue-600 transition-colors">コラム</Link>
                             <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">お問い合わせ</a>
                         </nav>
                         {/* モバイルメニューボタン */}
