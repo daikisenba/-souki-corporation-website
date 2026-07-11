@@ -25,6 +25,8 @@ const fadeUp = {
 export default function NyusatsuLp() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    // 送信された「希望内容」を控え、成功画面を出し分ける(資料請求ならDL動線を出す)
+    const [submittedIntent, setSubmittedIntent] = useState('');
 
     // 送信先は既存トップページと同じ Formspree エンドポイントに統一する。
     // 入札秘書LP由来の問い合わせと分かるよう category / _subject を付与する。
@@ -33,6 +35,7 @@ export default function NyusatsuLp() {
         setIsSubmitting(true);
         const form = e.currentTarget;
         const data = new FormData(form);
+        const intent = String(data.get('希望内容') || '');
         try {
             const response = await fetch('https://formspree.io/f/xzzqgapw', {
                 method: 'POST',
@@ -40,13 +43,22 @@ export default function NyusatsuLp() {
                 headers: { Accept: 'application/json' },
             });
             if (response.ok) {
+                setSubmittedIntent(intent);
                 setIsSubmitted(true);
                 form.reset();
             } else {
-                alert('送信に失敗しました。もう一度お試しください。');
+                // Formspreeが返すJSONエラーを可能な範囲で表示し、原因を追いやすくする
+                let detail = '';
+                try {
+                    const json = await response.json();
+                    detail = (json?.errors || []).map((x: { message?: string }) => x.message).join(' / ');
+                } catch {
+                    /* noop */
+                }
+                alert(`送信に失敗しました。${detail || 'もう一度お試しください。'}`);
             }
         } catch (error) {
-            alert('エラーが発生しました。');
+            alert('エラーが発生しました。通信環境をご確認のうえ、再度お試しください。');
         } finally {
             setIsSubmitting(false);
         }
@@ -300,12 +312,34 @@ export default function NyusatsuLp() {
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
                                         <CheckCircle2 className="w-10 h-10 text-green-600" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-blue-800">ありがとうございます</h3>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        送信が完了しました。
-                                        <br />
-                                        内容を確認の上、担当者よりご連絡いたします。
-                                    </p>
+                                    {submittedIntent === '資料請求' ? (
+                                        <>
+                                            <h3 className="text-xl font-bold text-blue-800">
+                                                資料請求ありがとうございました！
+                                            </h3>
+                                            <p className="text-gray-600 leading-relaxed">
+                                                資料は以下のボタンからPDFで保存（印刷）していただけます。
+                                                <br />
+                                                内容について、代表の千羽（d.senba@souki-cp.co.jp）より折り返しご連絡することもございます。
+                                            </p>
+                                            <Link
+                                                href="/nyusatsu-hisho/brochure"
+                                                className="mt-2 inline-flex items-center gap-2 bg-blue-700 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-800 transition-colors"
+                                            >
+                                                <FileDown className="w-5 h-5" />
+                                                サービス資料をダウンロードする
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h3 className="text-xl font-bold text-blue-800">送信ありがとうございました</h3>
+                                            <p className="text-gray-600 leading-relaxed">
+                                                内容を確認し、代表の千羽（d.senba@souki-cp.co.jp）より
+                                                <br />
+                                                折り返しメールにてご連絡いたします。
+                                            </p>
+                                        </>
+                                    )}
                                     <button
                                         onClick={() => setIsSubmitted(false)}
                                         className="mt-2 px-8 py-3 bg-blue-100 text-blue-700 font-semibold rounded-full hover:bg-blue-200 transition-colors"

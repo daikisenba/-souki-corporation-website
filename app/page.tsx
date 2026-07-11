@@ -225,6 +225,8 @@ export default function Home() {
     // ★追加：フォーム送信の状態管理
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    // 送信された相談区分を控え、入札秘書の場合は資料DL動線を出す
+    const [submittedCategory, setSubmittedCategory] = useState('');
 
     // ★追加：フォーム送信処理
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -233,6 +235,7 @@ export default function Home() {
 
         const form = e.currentTarget;
         const data = new FormData(form);
+        const category = String(data.get('category') || '');
 
         try {
             // Formspreeへの非同期送信
@@ -245,13 +248,21 @@ export default function Home() {
             });
 
             if (response.ok) {
+                setSubmittedCategory(category);
                 setIsSubmitted(true);
                 form.reset();
             } else {
-                alert("送信に失敗しました。もう一度お試しください。");
+                let detail = '';
+                try {
+                    const json = await response.json();
+                    detail = (json?.errors || []).map((x: { message?: string }) => x.message).join(' / ');
+                } catch {
+                    /* noop */
+                }
+                alert(`送信に失敗しました。${detail || 'もう一度お試しください。'}`);
             }
         } catch (error) {
-            alert("エラーが発生しました。");
+            alert("エラーが発生しました。通信環境をご確認のうえ、再度お試しください。");
         } finally {
             setIsSubmitting(false);
         }
@@ -851,11 +862,30 @@ export default function Home() {
                                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
                                         <CheckCircle2 className="w-10 h-10 text-green-600" />
                                     </div>
-                                    <h4 className="text-2xl font-bold text-blue-800">お問い合わせありがとうございます</h4>
-                                    <p className="text-gray-600 leading-relaxed">
-                                        メッセージが無事に送信されました。<br />
-                                        内容を確認の上、24時間以内に担当者よりご連絡させていただきます。
-                                    </p>
+                                    {submittedCategory === '入札レコメンド（入札秘書）' ? (
+                                        <>
+                                            <h4 className="text-2xl font-bold text-blue-800">送信ありがとうございました</h4>
+                                            <p className="text-gray-600 leading-relaxed">
+                                                入札秘書のサービス資料は、以下のボタンからPDFで保存（印刷）していただけます。<br />
+                                                内容を確認し、代表の千羽（d.senba@souki-cp.co.jp）より折り返しメールにてご連絡いたします。
+                                            </p>
+                                            <Link
+                                                href="/nyusatsu-hisho/brochure"
+                                                className="inline-flex items-center gap-2 bg-blue-700 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-800 transition-colors"
+                                            >
+                                                <FileText className="w-5 h-5" />
+                                                サービス資料をダウンロードする
+                                            </Link>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <h4 className="text-2xl font-bold text-blue-800">送信ありがとうございました</h4>
+                                            <p className="text-gray-600 leading-relaxed">
+                                                内容を確認し、代表の千羽（d.senba@souki-cp.co.jp）より<br />
+                                                折り返しメールにてご連絡いたします。
+                                            </p>
+                                        </>
+                                    )}
                                     <button
                                         onClick={() => setIsSubmitted(false)}
                                         className="mt-6 px-8 py-3 bg-blue-100 text-blue-700 font-semibold rounded-full hover:bg-blue-200 transition-colors"
