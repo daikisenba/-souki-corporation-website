@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== 資料ブローシャー(/nyusatsu-hisho/brochure)の印刷用スタイル ===== */
+/* A4サイズのシート。画面ではプレビュー、印刷/PDF保存時にA4ぴったりに収める。 */
+.brochure-sheet {
+    width: 210mm;
+    min-height: 297mm;
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    html,
+    body {
+        background: #ffffff !important;
+    }
+
+    /* 印刷時に隠す要素(ツールバー等) */
+    .no-print {
+        display: none !important;
+    }
+
+    /* シートの影・余白を消してA4に密着させ、1シート=1ページにする */
+    .brochure-sheet {
+        box-shadow: none !important;
+        margin: 0 !important;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .brochure-sheet:last-of-type {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    /* 背景色・枠線を印刷でも保持(比較表の色分け等) */
+    .brochure-print {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
 /* 高級感を演出するカスタムプロパティ */
 :root {
     --gold-primary: #D4AF37;

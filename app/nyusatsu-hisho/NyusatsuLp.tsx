@@ -12,6 +12,7 @@ import {
     Bell,
     ShieldCheck,
     Mail,
+    FileDown,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -101,6 +102,14 @@ export default function NyusatsuLp() {
                             >
                                 無料トライアルを試す
                             </a>
+                        </div>
+                        <div className="mt-4">
+                            <Link
+                                href="/nyusatsu-hisho/brochure"
+                                className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 font-medium text-sm underline underline-offset-4"
+                            >
+                                <FileDown className="w-4 h-4" /> サービス資料をPDFでダウンロード
+                            </Link>
                         </div>
                     </motion.div>
                 </section>
