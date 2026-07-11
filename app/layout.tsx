@@ -6,6 +6,8 @@ import './globals.css'
 const GA_MEASUREMENT_ID = 'G-70TJY4VDYB'
 
 export const metadata: Metadata = {
+    // OG/Twitter画像の相対URLを絶対URLへ解決するための基準(未設定だとlocalhostに解決される)
+    metadataBase: new URL('https://www.souki-cp.co.jp'),
     title: '株式会社想樹 - 成長の道を、共に歩むパートナー',
     description: '公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。助成金コンサルティング、公共事業入札支援、営業業務の効率化サービスを提供。',
     keywords: '助成金コンサルティング, 公共事業入札支援, 営業業務効率化, AI活用サービス, 株式会社想樹, 千羽太樹',

@@ -597,11 +597,22 @@ export default function Home() {
                                     <span>安定した事業基盤の構築サポート</span>
                                 </motion.div>
                             </div>
+                            {/* 入札秘書LPへの導線 */}
+                            <Link
+                                href="/nyusatsu-hisho"
+                                className="mt-6 block bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 hover:bg-blue-100 transition-colors"
+                            >
+                                <span className="text-xs font-semibold text-orange-500">月額3万円・初期費用0円</span>
+                                <span className="flex items-center justify-between mt-1 text-blue-700 font-bold">
+                                    毎朝、案件が届く「入札秘書」
+                                    <ArrowRight className="w-4 h-4" />
+                                </span>
+                            </Link>
                             <motion.a
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 href="#contact"
-                                className="bg-blue-700 text-white font-semibold px-6 py-3 rounded-full self-start shadow mt-6 hover:bg-blue-800 transition-colors"
+                                className="bg-blue-700 text-white font-semibold px-6 py-3 rounded-full self-start shadow mt-4 hover:bg-blue-800 transition-colors"
                             >
                                 無料相談はこちら
                             </motion.a>
@@ -868,6 +879,7 @@ export default function Home() {
                                         <option value="">相談区分を選択</option>
                                         <option value="助成金コンサルティング">助成金コンサルティング</option>
                                         <option value="公共事業入札支援">公共事業入札支援</option>
+                                        <option value="入札レコメンド（入札秘書）">入札レコメンド（入札秘書）</option>
                                         <option value="営業業務の効率化">営業業務の効率化</option>
                                         <option value="その他">その他</option>
                                     </select>
