@@ -8,7 +8,7 @@ const GA_MEASUREMENT_ID = 'G-70TJY4VDYB'
 export const metadata: Metadata = {
     // OG/Twitter画像の相対URLを絶対URLへ解決するための基準(未設定だとlocalhostに解決される)
     metadataBase: new URL('https://www.souki-cp.co.jp'),
-    title: '株式会社想樹 - 成長の道を、共に歩むパートナー',
+    title: '株式会社想樹 - 入札案件が毎朝届くAI入札秘書｜公共入札支援',
     description: '公共入札に特化し、中小企業の入札参加を伴走支援します。条件に合った入札案件を毎朝お届けする入札レコメンドサービス「入札秘書」、公共事業入札支援を提供する株式会社想樹。',
     keywords: '公共入札, 公共事業入札支援, 入札情報サービス, 入札 案件 メール, 中小企業 入札, 入札レコメンド, 入札秘書, 株式会社想樹',
     authors: [{ name: '株式会社想樹' }],
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
         },
     },
     openGraph: {
-        title: '株式会社想樹 - 成長の道を、共に歩むパートナー',
-        description: '公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。',
+        title: '株式会社想樹 - 入札案件が毎朝届くAI入札秘書｜公共入札支援',
+        description: '条件に合った公共入札の新着案件を毎朝メールでお届け。落札相場つきで応札の判断がすぐ進む、中小企業のためのAI入札秘書（月額3万円）。',
         type: 'website',
         locale: 'ja_JP',
         siteName: '株式会社想樹',
@@ -38,14 +38,14 @@ export const metadata: Metadata = {
                 url: '/og-image.jpg',
                 width: 1200,
                 height: 630,
-                alt: '株式会社想樹 - 成長の道を、共に歩むパートナー',
+                alt: '株式会社想樹 - 入札案件が毎朝届くAI入札秘書｜公共入札支援',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
-        title: '株式会社想樹 - 成長の道を、共に歩むパートナー',
-        description: '公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。',
+        title: '株式会社想樹 - 入札案件が毎朝届くAI入札秘書｜公共入札支援',
+        description: '条件に合った公共入札の新着案件を毎朝メールでお届け。落札相場つきで応札の判断がすぐ進む、中小企業のためのAI入札秘書（月額3万円）。',
         images: ['/og-image.jpg'],
     },
     alternates: {

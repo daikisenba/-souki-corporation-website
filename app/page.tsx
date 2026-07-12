@@ -359,7 +359,7 @@ export default function Home() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(24px,6vw,48px)] tracking-tight leading-snug"
                         >
-                            <TypewriterText text="成長の道を、共に歩むパートナー" />
+                            <TypewriterText text="入札案件、毎朝メールで届きます。" />
                         </motion.h1>
                         <motion.h2
                             initial={{ opacity: 0, x: -50 }}
@@ -367,7 +367,7 @@ export default function Home() {
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="text-base md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug"
                         >
-                            変化を力に変える伴走者
+                            中小企業のためのAI入札秘書（月額3万円）
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, x: -50 }}
@@ -375,29 +375,32 @@ export default function Home() {
                             transition={{ duration: 0.8, delay: 0.6 }}
                             className="text-sm md:text-lg text-gray-700 mb-6 font-sans leading-relaxed"
                         >
-                            公共事業の確実性と生成AIによる効率化を両立し、信頼できる伴走パートナーとして企業・社会の生産性向上に貢献します。
+                            条件を登録するだけで、公共入札の新着案件を毎朝自動でお届け。落札相場もひと目でわかるから、「探す・調べる」手間がゼロに。1日5分で応札を検討できます。
                         </motion.p>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
-                            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4"
+                            className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-4"
                         >
-                            <motion.a
-                                whileHover={{
-                                    scale: 1.05,
-                                    y: -2,
-                                    boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)"
-                                }}
-                                whileTap={{ scale: 0.95 }}
-                                href="#contact"
-                                aria-label="無料相談フォームへ（24時間以内に返信）"
-                                className="rounded-xl px-4 md:px-6 py-3 bg-white text-blue-700 font-semibold shadow-lg hover:bg-blue-100 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base"
-                                role="button"
-                                tabIndex={0}
-                            >
-                                無料相談（24時間以内に返信）
-                            </motion.a>
+                            <div className="flex flex-col gap-1">
+                                <motion.a
+                                    whileHover={{
+                                        scale: 1.05,
+                                        y: -2,
+                                        boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)"
+                                    }}
+                                    whileTap={{ scale: 0.95 }}
+                                    href="#contact"
+                                    aria-label="10秒でできる無料相談フォームへ（フォーム入力のみ・電話番号不要）"
+                                    className="rounded-xl px-4 md:px-6 py-3 bg-white text-blue-700 font-semibold shadow-lg hover:bg-blue-100 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base text-center"
+                                    role="button"
+                                    tabIndex={0}
+                                >
+                                    10秒でできる無料相談
+                                </motion.a>
+                                <span className="text-xs text-gray-600 text-center">フォーム入力のみ・電話番号は不要</span>
+                            </div>
                             <motion.a
                                 whileHover={{
                                     scale: 1.05,
@@ -405,11 +408,11 @@ export default function Home() {
                                     boxShadow: "0 10px 25px rgba(59, 130, 246, 0.2)"
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                href="#services"
-                                aria-label="サービス詳細へ"
-                                className="rounded-xl px-4 md:px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base"
+                                href="/nyusatsu-hisho"
+                                aria-label="入札秘書サービスの詳細へ"
+                                className="rounded-xl px-4 md:px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base text-center self-start sm:self-auto"
                             >
-                                サービス詳細
+                                入札秘書を見る
                             </motion.a>
                         </motion.div>
                     </div>
@@ -455,7 +458,7 @@ export default function Home() {
                                         transition={{ duration: 0.6, delay: 1.0 }}
                                         className="text-blue-700 text-xs md:text-sm font-medium"
                                     >
-                                        最新技術で常に進化
+                                        毎朝、案件が届く時間です。
                                     </motion.div>
 
                                     {/* 装飾的な要素 */}
