@@ -22,6 +22,9 @@ const fadeUp = {
     viewport: { once: true },
 };
 
+// Stripe決済リンク(14日間無料トライアル→月額課金)。トライアル系CTAの遷移先。
+const STRIPE_TRIAL_URL = 'https://buy.stripe.com/14AaER5s3cOk2FM4cX67S00';
+
 export default function NyusatsuLp() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -109,10 +112,10 @@ export default function NyusatsuLp() {
                                 無料で資料請求 <ArrowRight className="w-5 h-5" />
                             </a>
                             <a
-                                href="#contact"
-                                className="bg-white text-blue-700 border-2 border-blue-200 font-semibold px-8 py-4 rounded-full hover:border-blue-400 transition-colors inline-flex items-center justify-center gap-2"
+                                href={STRIPE_TRIAL_URL}
+                                className="bg-orange-500 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-orange-600 transition-colors inline-flex items-center justify-center gap-2"
                             >
-                                無料トライアルを試す
+                                14日間無料で試してみる <ArrowRight className="w-5 h-5" />
                             </a>
                         </div>
                         <div className="mt-4">
@@ -329,6 +332,39 @@ export default function NyusatsuLp() {
                                                 <FileDown className="w-5 h-5" />
                                                 サービス資料をダウンロードする
                                             </Link>
+                                            <div className="mt-2 pt-4 border-t border-gray-100 w-full">
+                                                <p className="text-sm text-gray-600 mb-3">
+                                                    実際のレコメンドメールを体験したい方は、こちらから。
+                                                </p>
+                                                <a
+                                                    href={STRIPE_TRIAL_URL}
+                                                    className="inline-flex items-center gap-2 bg-orange-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors"
+                                                >
+                                                    14日間無料で試してみる <ArrowRight className="w-4 h-4" />
+                                                </a>
+                                            </div>
+                                        </>
+                                    ) : submittedIntent === '無料トライアル' ? (
+                                        <>
+                                            <h3 className="text-xl font-bold text-blue-800">送信ありがとうございました！</h3>
+                                            <p className="text-gray-600 leading-relaxed">
+                                                このままクレジットカードをご登録いただくと、
+                                                <br />
+                                                14日間の無料トライアルを今すぐ開始できます。
+                                            </p>
+                                            <a
+                                                href={STRIPE_TRIAL_URL}
+                                                className="mt-2 inline-flex items-center gap-2 bg-orange-500 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+                                            >
+                                                14日間無料トライアルを始める <ArrowRight className="w-5 h-5" />
+                                            </a>
+                                            <p className="text-xs text-gray-500 leading-relaxed">
+                                                ・トライアル期間中の解約は料金0円
+                                                <br />
+                                                ・トライアル終了後は月額33,000円（税込）が自動で開始されます
+                                                <br />
+                                                ・解約はいつでも可能です
+                                            </p>
                                         </>
                                     ) : (
                                         <>

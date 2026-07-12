@@ -8,7 +8,7 @@ import Image from "next/image";
 // Next.jsのルーティング
 import Link from "next/link";
 // Lucideアイコン（線アイコン）利用
-import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Bot, Users, Code, Cpu, Database, Globe, Zap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Users, Code, Cpu, Database, Globe, Zap, CheckCircle2 } from "lucide-react";
 
 // パーティクルコンポーネント
 const ParticleBackground = () => {
@@ -486,76 +486,12 @@ export default function Home() {
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-blue-700 mb-4">事業内容</h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                            信頼性・安定性・実績を重視し、お客様の成長をサポートする3つのサービスを提供しています
+                            公共入札に特化し、中小企業の入札参加を伴走支援します
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {/* 助成金コンサルティング */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -10 }}
-                            className="bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col h-full hover:shadow-xl transition-all duration-300"
-                        >
-                            <div className="flex items-center mb-6">
-                                <motion.div
-                                    whileHover={{ rotate: 360 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4"
-                                >
-                                    <Award className="w-6 h-6 text-blue-600" />
-                                </motion.div>
-                                <h3 className="text-xl font-bold text-blue-700">助成金コンサルティング</h3>
-                            </div>
-                            <p className="text-gray-700 mb-6 flex-grow">
-                                企業や個人事業主の皆さまが活用できる各種助成金制度について、情報収集から申請書類の作成、提出までを一貫してサポートいたします。
-                            </p>
-                            <div className="space-y-3 text-sm text-gray-600">
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.1 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>返済不要の資金調達手段として活用</span>
-                                </motion.div>
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>豊富な実務経験による最適な制度選定</span>
-                                </motion.div>
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>スムーズな受給に向けた具体的な支援</span>
-                                </motion.div>
-                            </div>
-                            <motion.a
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                href="#contact"
-                                className="bg-blue-700 text-white font-semibold px-6 py-3 rounded-full self-start shadow mt-6 hover:bg-blue-800 transition-colors"
-                            >
-                                無料相談はこちら
-                            </motion.a>
-                        </motion.div>
-
-                        {/* 工業事業入札支援 */}
+                    <div className="grid grid-cols-1 max-w-2xl mx-auto">
+                        {/* 公共事業入札支援 */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -630,69 +566,6 @@ export default function Home() {
                             </motion.a>
                         </motion.div>
 
-                        {/* AI活用サービス */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -10 }}
-                            className="bg-white/80 rounded-2xl shadow-lg p-8 flex flex-col h-full hover:shadow-xl transition-all duration-300"
-                        >
-                            <div className="flex items-center mb-6">
-                                <motion.div
-                                    whileHover={{ rotate: 360 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4"
-                                >
-                                    <Bot className="w-6 h-6 text-blue-600" />
-                                </motion.div>
-                                <h3 className="text-xl font-bold text-blue-700">営業業務の効率化</h3>
-                            </div>
-                            <p className="text-gray-700 mb-6 flex-grow">
-                                最新のAI技術を活用し、営業活動の効率化と売上向上を実現します。顧客データの分析、リード管理の自動化、営業活動の最適化により、営業チームの生産性を大幅に向上させます。
-                            </p>
-                            <div className="space-y-3 text-sm text-gray-600">
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.1 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>顧客データ分析による営業戦略立案</span>
-                                </motion.div>
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>リード管理の自動化・効率化</span>
-                                </motion.div>
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                    viewport={{ once: true }}
-                                    className="flex items-start"
-                                >
-                                    <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                    <span>営業活動の最適化と売上向上支援</span>
-                                </motion.div>
-                            </div>
-                            <motion.a
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                href="#contact"
-                                className="bg-blue-700 text-white font-semibold px-6 py-3 rounded-full self-start shadow mt-6 hover:bg-blue-800 transition-colors"
-                            >
-                                無料相談はこちら
-                            </motion.a>
-                        </motion.div>
                     </div>
                 </section>
 
@@ -774,7 +647,7 @@ export default function Home() {
                         >
                             <Users className="w-12 h-12 text-blue-600 mx-auto mb-4" />
                             <h3 className="font-semibold text-blue-700 mb-2">コスト削減</h3>
-                            <p className="text-sm text-gray-600">助成金活用とAI導入で経費を大幅削減</p>
+                            <p className="text-sm text-gray-600">入札案件の探索を自動化し、調査の手間とコストを削減</p>
                         </motion.div>
 
                         <motion.div
@@ -907,10 +780,8 @@ export default function Home() {
                                     <input type="email" name="email" placeholder="メールアドレス" required className="border rounded px-4 py-2" />
                                     <select name="category" required className="border rounded px-4 py-2">
                                         <option value="">相談区分を選択</option>
-                                        <option value="助成金コンサルティング">助成金コンサルティング</option>
                                         <option value="公共事業入札支援">公共事業入札支援</option>
                                         <option value="入札レコメンド（入札秘書）">入札レコメンド（入札秘書）</option>
-                                        <option value="営業業務の効率化">営業業務の効率化</option>
                                         <option value="その他">その他</option>
                                     </select>
                                     <textarea name="message" placeholder="ご相談内容" required className="border rounded px-4 py-2 min-h-[100px]" />

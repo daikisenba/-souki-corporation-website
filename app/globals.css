@@ -18,6 +18,8 @@
     html,
     body {
         background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     /* 印刷時に隠す要素(ツールバー等) */
@@ -25,23 +27,36 @@
         display: none !important;
     }
 
-    /* シートの影・余白を消してA4に密着させ、1シート=1ページにする */
-    .brochure-sheet {
-        box-shadow: none !important;
-        margin: 0 !important;
-        break-after: page;
-        page-break-after: always;
-    }
-
-    .brochure-sheet:last-of-type {
-        break-after: auto;
-        page-break-after: auto;
-    }
-
-    /* 背景色・枠線を印刷でも保持(比較表の色分け等) */
+    /* 外側コンテナの画面用装飾(flexのgap・余白・背景)を無効化する。
+       これらが残ると各シートの後ろに余白が入り、白紙ページの原因になる。 */
     .brochure-print {
+        display: block !important;
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 0 !important;
+        min-height: 0 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+    }
+
+    /* 各シートをA4ぴったりの固定高さにする。min-heightだと内容がわずかに超過して
+       2ページ目へ溢れ白紙が挟まるため、height固定 + overflow:hiddenで1シート=1ページを保証。 */
+    .brochure-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* 改ページは「後続シートの前」で入れる。break-afterで末尾に入れると
+       最後に白紙ページができやすいため、break-beforeを採用。 */
+    .brochure-sheet:not(:first-of-type) {
+        break-before: page;
+        page-break-before: always;
     }
 }
 
