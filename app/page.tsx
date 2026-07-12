@@ -153,62 +153,6 @@ const TechCard = ({ icon: Icon, title, description, delay }: {
     );
 };
 
-// 時間表示コンポーネント
-const ClockDisplay = () => {
-    const [time, setTime] = useState<string>('');
-
-    useEffect(() => {
-        const updateTime = () => {
-            const now = new Date();
-            setTime(now.toLocaleTimeString('ja-JP', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }));
-        };
-
-        updateTime(); // 即座に初期表示
-        const timer = setInterval(updateTime, 1000);
-
-        return () => clearInterval(timer);
-    }, []);
-
-    return (
-        <span className="font-mono">
-            {time || '00:00:00'}
-        </span>
-    );
-};
-
-// 日付表示コンポーネント
-const TimeDisplay = () => {
-    const [date, setDate] = useState<string>('');
-
-    useEffect(() => {
-        const updateDate = () => {
-            const now = new Date();
-            setDate(now.toLocaleDateString('ja-JP', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                weekday: 'long'
-            }));
-        };
-
-        updateDate(); // 即座に初期表示
-        const timer = setInterval(updateDate, 1000);
-
-        return () => clearInterval(timer);
-    }, []);
-
-    return (
-        <span className="font-medium">
-            {date || '2025年1月1日 水曜日'}
-        </span>
-    );
-};
-
 export default function Home() {
     // パララックス用（md以上のみ有効化）
     const { scrollY } = useScroll();
@@ -344,36 +288,36 @@ export default function Home() {
                     />
                 </div>
 
-                {/* Heroセクション（最新仕様） */}
+                {/* Heroセクション（1カラム中央寄せ） */}
                 <motion.section
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center w-full"
+                    className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 py-10 md:py-24 w-full flex justify-center"
                 >
-                    {/* 左：テキスト＋ガラスモーフ */}
-                    <div className="backdrop-blur-lg bg-white/10 ring-1 ring-white/15 rounded-2xl p-4 md:p-8 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] space-y-3">
+                    {/* テキスト＋ガラスモーフ（中央寄せ・1カラム） */}
+                    <div className="backdrop-blur-lg bg-white/10 ring-1 ring-white/15 rounded-2xl p-6 md:p-12 text-slate-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] space-y-4 text-center max-w-3xl w-full">
                         <motion.h1
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(24px,6vw,48px)] tracking-tight leading-snug"
+                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,6vw,56px)] tracking-tight leading-snug"
                         >
                             <TypewriterText text="入札案件、毎朝メールで届きます。" />
                         </motion.h1>
                         <motion.h2
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="text-base md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug"
                         >
                             中小企業のためのAI入札秘書（月額3万円）
                         </motion.h2>
                         <motion.p
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="text-sm md:text-lg text-gray-700 mb-6 font-sans leading-relaxed"
+                            className="text-sm md:text-lg text-gray-700 mb-6 font-sans leading-relaxed max-w-2xl mx-auto"
                         >
                             条件を登録するだけで、公共入札の新着案件を毎朝自動でお届け。落札相場もひと目でわかるから、「探す・調べる」手間がゼロに。1日5分で応札を検討できます。
                         </motion.p>
@@ -381,9 +325,9 @@ export default function Home() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
-                            className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-4"
+                            className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 sm:gap-4 mt-4"
                         >
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col items-center gap-1">
                                 <motion.a
                                     whileHover={{
                                         scale: 1.05,
@@ -410,72 +354,12 @@ export default function Home() {
                                 whileTap={{ scale: 0.95 }}
                                 href="/nyusatsu-hisho"
                                 aria-label="入札秘書サービスの詳細へ"
-                                className="rounded-xl px-4 md:px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base text-center self-start sm:self-auto"
+                                className="rounded-xl px-4 md:px-6 py-3 border border-blue-200 bg-blue-50 text-blue-700 font-semibold shadow-lg hover:bg-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B63F6] focus-visible:ring-offset-2 text-sm md:text-base text-center"
                             >
                                 入札秘書を見る
                             </motion.a>
                         </motion.div>
                     </div>
-
-                    {/* 右：お洒落な時間表示 */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="flex justify-center items-center transform-gpu will-change-transform"
-                    >
-                        <div className="relative md:ml-16 md:mt-24 mt-8">
-                            {/* 背景の円形グラデーション */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-500/20 to-pink-400/20 rounded-full blur-xl animate-pulse"></div>
-
-                            {/* メインの時間表示コンテナ */}
-                            <div className="relative bg-white/20 backdrop-blur-md rounded-3xl p-4 md:p-8 border border-white/30 shadow-2xl">
-                                <div className="text-center space-y-3 md:space-y-4">
-                                    {/* 日付表示 */}
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: 0.6 }}
-                                        className="text-blue-900 text-xs md:text-sm font-medium tracking-wider"
-                                    >
-                                        <TimeDisplay />
-                                    </motion.div>
-
-                                    {/* 時間表示 */}
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.8, delay: 0.8 }}
-                                        className="text-2xl md:text-4xl lg:text-5xl font-bold text-blue-800 tracking-tight"
-                                    >
-                                        <ClockDisplay />
-                                    </motion.div>
-
-                                    {/* 技術力アピールテキスト */}
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: 1.0 }}
-                                        className="text-blue-700 text-xs md:text-sm font-medium"
-                                    >
-                                        毎朝、案件が届く時間です。
-                                    </motion.div>
-
-                                    {/* 装飾的な要素 */}
-                                    <motion.div
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                        className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-60"
-                                    />
-                                    <motion.div
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                                        className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
                 </motion.section>
 
                 {/* 事業概要セクション */}
