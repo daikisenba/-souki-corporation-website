@@ -37,7 +37,7 @@ export default function NyusatsuLp() {
         const data = new FormData(form);
         const intent = String(data.get('希望内容') || '');
         try {
-            const response = await fetch('https://formspree.io/f/xzzqgapw', {
+            const response = await fetch('https://formspree.io/f/xeeyjzlw', {
                 method: 'POST',
                 body: data,
                 headers: { Accept: 'application/json' },

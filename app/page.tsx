@@ -239,7 +239,7 @@ export default function Home() {
 
         try {
             // Formspreeへの非同期送信
-            const response = await fetch("https://formspree.io/f/xzzqgapw", {
+            const response = await fetch("https://formspree.io/f/xeeyjzlw", {
                 method: "POST",
                 body: data,
                 headers: {
