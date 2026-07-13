@@ -301,9 +301,9 @@ export default function Home() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,6vw,56px)] tracking-tight leading-snug"
+                            className="font-bold text-[#0B63F6] mb-4 font-sans text-[clamp(28px,6vw,56px)] tracking-tight leading-snug whitespace-pre-line"
                         >
-                            <TypewriterText text="入札案件、毎朝メールで届きます。" />
+                            <TypewriterText text={"入札案件、毎朝メールで\n届きます。"} />
                         </motion.h1>
                         <motion.h2
                             initial={{ opacity: 0, y: -20 }}

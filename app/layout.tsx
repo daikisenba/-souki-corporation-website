@@ -68,6 +68,52 @@ export default function RootLayout({
                     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
                     rel="stylesheet"
                 />
+                {/* 構造化データ(JSON-LD): 検索エンジン・AI検索に事業/サービスを正しく伝え、
+                    リッチリザルトと上位表示・AI回答での引用に効かせる */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify([
+                            {
+                                '@context': 'https://schema.org',
+                                '@type': 'Organization',
+                                name: '株式会社想樹',
+                                alternateName: '想樹',
+                                url: 'https://www.souki-cp.co.jp',
+                                logo: 'https://www.souki-cp.co.jp/og-image.jpg',
+                                email: 'd.senba@souki-cp.co.jp',
+                                foundingDate: '2024-03',
+                                description:
+                                    '公共入札に特化し、中小企業の入札参加を伴走支援。条件に合った公共入札の新着案件を毎朝メールで届けるAI入札レコメンドサービス「入札秘書」を提供。',
+                                founder: { '@type': 'Person', name: '千羽 太樹' },
+                                address: {
+                                    '@type': 'PostalAddress',
+                                    addressCountry: 'JP',
+                                    addressRegion: '東京都',
+                                    addressLocality: '世田谷区',
+                                    streetAddress: '松原5-58-17',
+                                },
+                            },
+                            {
+                                '@context': 'https://schema.org',
+                                '@type': 'Service',
+                                name: '入札秘書',
+                                serviceType: '公共入札 案件レコメンドサービス',
+                                provider: { '@type': 'Organization', name: '株式会社想樹' },
+                                areaServed: { '@type': 'Country', name: '日本' },
+                                url: 'https://www.souki-cp.co.jp/nyusatsu-hisho',
+                                description:
+                                    '御社の資格等級・地域・品目に合う公共入札の新着案件を、AIが毎朝メールでお届け。過去の落札相場つきで応札判断を支援する、中小企業向けの入札レコメンドサービス。',
+                                offers: {
+                                    '@type': 'Offer',
+                                    price: '33000',
+                                    priceCurrency: 'JPY',
+                                    description: '月額33,000円（税込）。14日間無料トライアルつき。',
+                                },
+                            },
+                        ]),
+                    }}
+                />
             </head>
             <body className="antialiased">
                 {children}
