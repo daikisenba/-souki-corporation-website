@@ -433,7 +433,7 @@ export default function NyusatsuLp() {
                 {/* フッター */}
                 <footer className="bg-blue-800 text-blue-100 py-10 text-center">
                     <p className="font-bold text-white mb-2">株式会社想樹</p>
-                    <p className="text-sm mb-4">変化を力に変える伴走者</p>
+                    <p className="text-sm mb-4">公共入札支援・毎朝届くAI入札秘書</p>
                     <Link href="/" className="text-blue-200 hover:text-white text-sm underline">
                         トップページへ戻る
                     </Link>
