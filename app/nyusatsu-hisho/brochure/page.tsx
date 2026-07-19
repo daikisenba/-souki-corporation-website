@@ -174,7 +174,7 @@ export default function BrochurePage() {
 
                     {/* 会社の信頼 */}
                     <div className="bg-blue-50 rounded-xl p-5 mb-8">
-                        <p className="font-bold text-blue-800">株式会社想樹 ―「変化を力に変える伴走者」</p>
+                        <p className="font-bold text-blue-800">株式会社想樹 ― 公共入札支援・AI入札秘書の運営会社</p>
                         <p className="text-sm text-gray-600 mt-1">
                             補助金・公共入札・営業支援で中小企業を支援してきた実績を、自動化・低価格化してお届けします。
                         </p>

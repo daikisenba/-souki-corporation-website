@@ -7,7 +7,7 @@ export default function SiteFooter() {
             <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-left">
                     <p className="font-bold text-white">株式会社想樹</p>
-                    <p className="text-sm">変化を力に変える伴走者</p>
+                    <p className="text-sm">公共入札支援・毎朝届くAI入札秘書</p>
                 </div>
                 <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
                     <Link href="/" className="hover:text-white transition-colors">
