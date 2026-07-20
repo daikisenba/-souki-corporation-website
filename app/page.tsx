@@ -9,6 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 // Lucideアイコン（線アイコン）利用
 import { ArrowRight, Mail, Phone, Building2, User, MapPin, FileText, Sparkles, Award, TrendingUp, Users, Code, Cpu, Database, Globe, Zap, CheckCircle2 } from "lucide-react";
+// GA4イベント計測
+import { trackEvent } from "../lib/analytics";
 
 // パーティクルコンポーネント
 const ParticleBackground = () => {
@@ -195,6 +197,8 @@ export default function Home() {
                 setSubmittedCategory(category);
                 setIsSubmitted(true);
                 form.reset();
+                // コンバージョン計測: 資料請求・無料相談の送信完了
+                trackEvent('generate_lead', { form_location: 'top_contact', category });
             } else {
                 let detail = '';
                 try {
@@ -631,6 +635,7 @@ export default function Home() {
                                             </p>
                                             <Link
                                                 href="/nyusatsu-hisho/brochure"
+                                                onClick={() => trackEvent('brochure_download', { source: 'top_success' })}
                                                 className="inline-flex items-center gap-2 bg-blue-700 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-blue-800 transition-colors"
                                             >
                                                 <FileText className="w-5 h-5" />
