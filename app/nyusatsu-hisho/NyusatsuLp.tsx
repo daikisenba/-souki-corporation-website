@@ -14,6 +14,7 @@ import {
     Mail,
     FileDown,
 } from 'lucide-react';
+import { trackEvent } from '../../lib/analytics';
 
 const fadeUp = {
     initial: { opacity: 0, y: 20 },
@@ -49,6 +50,8 @@ export default function NyusatsuLp() {
                 setSubmittedIntent(intent);
                 setIsSubmitted(true);
                 form.reset();
+                // コンバージョン計測: 資料請求・無料相談の送信完了
+                trackEvent('generate_lead', { form_location: 'lp_nyusatsu', intent });
             } else {
                 // Formspreeが返すJSONエラーを可能な範囲で表示し、原因を追いやすくする
                 let detail = '';
@@ -113,6 +116,7 @@ export default function NyusatsuLp() {
                             </a>
                             <a
                                 href={STRIPE_TRIAL_URL}
+                                onClick={() => trackEvent('trial_click', { source: 'lp_hero' })}
                                 className="bg-orange-500 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-orange-600 transition-colors inline-flex items-center justify-center gap-2"
                             >
                                 14日間無料で試してみる <ArrowRight className="w-5 h-5" />
@@ -121,6 +125,7 @@ export default function NyusatsuLp() {
                         <div className="mt-4">
                             <Link
                                 href="/nyusatsu-hisho/brochure"
+                                onClick={() => trackEvent('brochure_download', { source: 'lp_hero' })}
                                 className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 font-medium text-sm underline underline-offset-4"
                             >
                                 <FileDown className="w-4 h-4" /> サービス資料をPDFでダウンロード
