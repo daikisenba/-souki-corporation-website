@@ -32,7 +32,7 @@ const features = [
     {
         icon: ShieldCheck,
         title: '月額3万円（税別）・初期費用0円',
-        body: '大手（月5.7万円〜）より手の届く一律料金。今なら初期導入費用は無料（期間限定）。無理なく続けられます。',
+        body: '個別見積もりではなく、月額固定だから予算化しやすい一律料金。今なら初期導入費用は無料（期間限定）。無理なく続けられます。',
     },
 ];
 
@@ -53,7 +53,7 @@ const sampleListings = [
 ];
 
 const priceRows = [
-    ['月額', '5.7万円〜8.3万円', '3万円（税別）'],
+    ['月額', '個別見積もり（金額非公開）', '3万円（税別）固定'],
     ['初期費用', '別途かかる場合あり', '今なら0円（期間限定）'],
     ['案件の探し方', '自分で検索', '毎朝メールで届く'],
     ['落札相場', 'プランにより手薄', '標準でお届け'],
@@ -192,7 +192,7 @@ export default function BrochurePage() {
                         </tbody>
                     </table>
                     <p className="text-[10px] text-gray-400 mb-4">
-                        ※大手サービスの料金は各社公表情報に基づく一般的な目安です。
+                        ※大手サービスの料金体系は各社公表情報に基づく記載です。具体的な金額は各社の公式サイト・問い合わせ窓口でご確認ください。
                     </p>
 
                     {/* 導入までの流れ */}
@@ -212,7 +212,7 @@ export default function BrochurePage() {
 
                     {/* よくあるご質問 */}
                     <h2 className="text-lg font-bold text-blue-700 mb-3">よくあるご質問</h2>
-                    <div className="space-y-2 mb-4">
+                    <div className="space-y-2 mb-3">
                         {faqs.map((f, i) => (
                             <div key={i}>
                                 <p className="text-sm font-bold text-blue-900">Q. {f.q}</p>
@@ -222,7 +222,7 @@ export default function BrochurePage() {
                     </div>
 
                     {/* 正直な但し書き */}
-                    <div className="border border-gray-200 rounded-xl p-4 mb-4">
+                    <div className="border border-gray-200 rounded-xl p-4 mb-3">
                         <p className="text-sm font-bold text-blue-900 mb-1">
                             誇大な約束はしません。お約束するのは「探す手間をゼロにし、毎朝候補をお届けする」こと。ここは確実に守ります。
                         </p>
