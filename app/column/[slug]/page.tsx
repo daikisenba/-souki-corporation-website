@@ -50,6 +50,14 @@ export default async function ColumnArticlePage({ params }: { params: Params }) 
     return (
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white text-gray-800">
             <SiteHeader />
+            {/* 構造化データ(Article/FAQPage等)。検索エンジン・AI検索での引用に効かせる。
+                本文中にコードブロックとして出さず、必ずscriptタグとして出力する。 */}
+            {col.jsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: col.jsonLd }}
+                />
+            )}
             <main className="pt-24 md:pt-28">
                 <article className="max-w-3xl mx-auto px-4 md:px-6">
                     <header className="mb-8">

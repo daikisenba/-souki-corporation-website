@@ -14,6 +14,9 @@ export type ColumnMeta = {
     date: string; // YYYY-MM-DD
     keywords?: string;
     author?: string;
+    // 構造化データ(JSON-LD)の生文字列。souki-company側の変換で付与される。
+    // 記事ページで <script type="application/ld+json"> として出力する。
+    jsonLd?: string;
 };
 
 export type Column = ColumnMeta & {
@@ -25,6 +28,8 @@ function readSlugs(): string[] {
     return fs
         .readdirSync(COLUMNS_DIR)
         .filter((f) => f.endsWith('.md'))
+        // README.md 等の記事以外のファイルを記事として拾わない
+        .filter((f) => !f.startsWith('README') && !f.startsWith('_'))
         .map((f) => f.replace(/\.md$/, ''));
 }
 
@@ -40,6 +45,7 @@ function parseFile(slug: string): Column | null {
         date: String(data.date ?? ''),
         keywords: data.keywords ? String(data.keywords) : undefined,
         author: data.author ? String(data.author) : undefined,
+        jsonLd: data.jsonLd ? String(data.jsonLd) : undefined,
         content,
     };
 }
@@ -49,7 +55,8 @@ export function getAllColumnsMeta(): ColumnMeta[] {
     return readSlugs()
         .map(parseFile)
         .filter((c): c is Column => c !== null)
-        .map(({ content, ...meta }) => meta)
+        // 一覧では本文とJSON-LDは不要なので落とす
+        .map(({ content, jsonLd, ...meta }) => meta)
         .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
