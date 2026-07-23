@@ -34,11 +34,13 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     };
 }
 
-function formatDate(date: string): string {
+// 一覧ページ(app/column/page.tsx)と同じ方針: 表示は月単位の「最終更新」に
+// 留め、日単位の正確な日付は <time dateTime> とJSON-LDのみに残す。
+function formatMonth(date: string): string {
     if (!date) return '';
     const d = new Date(date);
     if (Number.isNaN(d.getTime())) return date;
-    return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+    return `最終更新: ${d.getFullYear()}年${d.getMonth() + 1}月`;
 }
 
 export default async function ColumnArticlePage({ params }: { params: Params }) {
@@ -61,7 +63,11 @@ export default async function ColumnArticlePage({ params }: { params: Params }) 
             <main className="pt-24 md:pt-28">
                 <article className="max-w-3xl mx-auto px-4 md:px-6">
                     <header className="mb-8">
-                        {col.date && <time className="text-sm text-blue-500 font-medium">{formatDate(col.date)}</time>}
+                        {col.date && (
+                            <time dateTime={col.date} className="text-sm text-blue-500 font-medium">
+                                {formatMonth(col.date)}
+                            </time>
+                        )}
                         <h1 className="text-2xl md:text-4xl font-bold text-blue-800 leading-tight mt-2">{col.title}</h1>
                         {col.description && <p className="text-gray-600 mt-4">{col.description}</p>}
                     </header>
