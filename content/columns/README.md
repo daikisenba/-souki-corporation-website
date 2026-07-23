@@ -37,6 +37,13 @@ marketing/articles/<slug>.md
 
 ## 例外
 
-`njss-takai-erabikata.md` と `zensyocho-shikaku-annai.md` は、この同期の仕組みを作る前に
-このリポジトリで直接作成された記事です。souki-company 側に原稿がないため、当面は
-このディレクトリで管理します（将来 souki-company へ移管予定）。
+`zensyocho-shikaku-annai.md` は、この同期の仕組みを作る前にこのリポジトリで直接
+作成された記事です。souki-company 側に原稿がないため、当面はこのディレクトリで
+管理します（将来 souki-company へ移管予定）。
+
+## リダイレクト履歴
+
+- `njss-takai-erabikata`（2026-07-11公開）は `njss-alternative-pricing`
+  （2026-07-18公開、一次情報で裏取り済み）と検索意図が重複していたため、
+  2026-07-23 に統合。記事は削除し、`next.config.js` の `redirects()` で
+  301リダイレクトを設定してURLの評価を引き継いでいる。
