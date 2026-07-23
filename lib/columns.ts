@@ -33,6 +33,22 @@ function readSlugs(): string[] {
         .map((f) => f.replace(/\.md$/, ''));
 }
 
+// front matter の date はYAML上でクォートし忘れると(例: date: 2026-07-10)
+// YAMLパーサーが文字列ではなくDateオブジェクトとして解釈する。その場合
+// String()に通すと "Fri Jul 10 2026 09:00:00 GMT+0900 (日本標準時)" のような
+// 値になり、<time dateTime>属性としてHTML的に不正になる。常にYYYY-MM-DD
+// 形式へ正規化することで、front matter側の書き方に関わらず壊れないようにする。
+function normalizeDate(value: unknown): string {
+    if (value instanceof Date) {
+        if (Number.isNaN(value.getTime())) return '';
+        const y = value.getFullYear();
+        const m = String(value.getMonth() + 1).padStart(2, '0');
+        const d = String(value.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+    return value ? String(value) : '';
+}
+
 function parseFile(slug: string): Column | null {
     const filePath = path.join(COLUMNS_DIR, `${slug}.md`);
     if (!fs.existsSync(filePath)) return null;
@@ -42,7 +58,7 @@ function parseFile(slug: string): Column | null {
         slug,
         title: String(data.title ?? slug),
         description: String(data.description ?? ''),
-        date: String(data.date ?? ''),
+        date: normalizeDate(data.date),
         keywords: data.keywords ? String(data.keywords) : undefined,
         author: data.author ? String(data.author) : undefined,
         jsonLd: data.jsonLd ? String(data.jsonLd) : undefined,
