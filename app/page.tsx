@@ -168,6 +168,9 @@ export default function Home() {
         ["rgba(232, 241, 255, 1)", "rgba(255, 255, 255, 1)"]
     );
 
+    // モバイルヘッダーのハンバーガーメニュー開閉状態
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     // ★追加：フォーム送信の状態管理
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -245,14 +248,61 @@ export default function Home() {
                         </nav>
                         {/* モバイルメニューボタン */}
                         <div className="md:hidden">
-                            <button className="text-gray-600 hover:text-blue-600 transition-colors">
+                            <button
+                                type="button"
+                                onClick={() => setIsMobileMenuOpen((open) => !open)}
+                                aria-label={isMobileMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+                                aria-expanded={isMobileMenuOpen}
+                                className="text-gray-600 hover:text-blue-600 transition-colors"
+                            >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                    {isMobileMenuOpen ? (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    ) : (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                    )}
                                 </svg>
                             </button>
                         </div>
                     </motion.div>
                 </div>
+
+                {/* モバイルメニュー(展開時のみ表示。デスクトップでは常にnav直接表示のため不要) */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.nav
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="md:hidden overflow-hidden border-t border-blue-100/50 bg-white/95 backdrop-blur-md"
+                        >
+                            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-4">
+                                <a
+                                    href="#services"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                                >
+                                    事業内容
+                                </a>
+                                <Link
+                                    href="/column"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                                >
+                                    コラム
+                                </Link>
+                                <a
+                                    href="#contact"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                                >
+                                    お問い合わせ
+                                </a>
+                            </div>
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
             </header>
 
             <motion.main
