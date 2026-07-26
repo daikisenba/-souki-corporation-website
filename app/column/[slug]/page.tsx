@@ -68,7 +68,7 @@ export default async function ColumnArticlePage({ params }: { params: Params }) 
                                 {formatMonth(col.date)}
                             </time>
                         )}
-                        <h1 className="text-2xl md:text-4xl font-bold text-blue-800 leading-tight mt-2">{col.title}</h1>
+                        <h1 className="text-2xl md:text-4xl font-bold text-blue-800 leading-tight mt-2 text-balance">{col.title}</h1>
                         {col.description && <p className="text-gray-600 mt-4">{col.description}</p>}
                     </header>
 

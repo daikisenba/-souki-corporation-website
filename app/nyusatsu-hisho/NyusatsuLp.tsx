@@ -144,7 +144,7 @@ export default function NyusatsuLp() {
                             {[
                                 '全省庁統一資格は取ったが、案件を探す時間がない',
                                 '入札情報サービスは料金が分かりにくく、高くて手が出ない',
-                                '毎回いろんなサイトを見て回るのが手間',
+                                '毎回いろんなサイトを\n見て回るのが手間',
                                 'この案件、いくらで入れればいいのか相場が分からない',
                             ].map((text, i) => (
                                 <motion.div
@@ -154,7 +154,7 @@ export default function NyusatsuLp() {
                                     className="flex items-start gap-3 bg-white rounded-xl shadow-sm p-5"
                                 >
                                     <CheckCircle2 className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
-                                    <span className="text-gray-700">{text}</span>
+                                    <span className="text-gray-700 whitespace-pre-line">{text}</span>
                                 </motion.div>
                             ))}
                         </div>
@@ -213,9 +213,9 @@ export default function NyusatsuLp() {
                             <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden text-sm md:text-base">
                                 <thead>
                                     <tr className="bg-blue-50 text-blue-800">
-                                        <th className="p-4 text-left font-semibold"></th>
-                                        <th className="p-4 text-center font-semibold">大手入札情報サービス</th>
-                                        <th className="p-4 text-center font-semibold text-blue-700">想樹「入札秘書」</th>
+                                        <th className="p-4 text-left font-semibold whitespace-nowrap"></th>
+                                        <th className="p-4 text-center font-semibold whitespace-nowrap">大手入札情報サービス</th>
+                                        <th className="p-4 text-center font-semibold text-blue-700 whitespace-nowrap">想樹「入札秘書」</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -227,9 +227,9 @@ export default function NyusatsuLp() {
                                         ['対象', '全国・広範囲', '一般競争入札を中心に厳選'],
                                     ].map((row, i) => (
                                         <tr key={i} className="border-t border-gray-100">
-                                            <td className="p-4 font-medium text-gray-600">{row[0]}</td>
-                                            <td className="p-4 text-center text-gray-500">{row[1]}</td>
-                                            <td className="p-4 text-center font-bold text-blue-700 bg-blue-50/40">{row[2]}</td>
+                                            <td className="p-4 font-medium text-gray-600 whitespace-nowrap">{row[0]}</td>
+                                            <td className="p-4 text-center text-gray-500 whitespace-nowrap">{row[1]}</td>
+                                            <td className="p-4 text-center font-bold text-blue-700 bg-blue-50/40 whitespace-nowrap">{row[2]}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -270,8 +270,8 @@ export default function NyusatsuLp() {
                 {/* 正直な但し書き（信頼設計） */}
                 <section className="bg-blue-50/60 py-14 md:py-20">
                     <div className="max-w-3xl mx-auto px-4 md:px-6">
-                        <motion.h2 {...fadeUp} className="text-xl md:text-2xl font-bold text-blue-700 text-center mb-8">
-                            正直にお伝えしていること（だから安心）
+                        <motion.h2 {...fadeUp} className="text-xl md:text-2xl font-bold text-blue-700 text-center mb-8 whitespace-pre-line">
+                            {"正直にお伝えしていること\n（だから安心）"}
                         </motion.h2>
                         <motion.div {...fadeUp} className="bg-white rounded-2xl shadow-sm p-6 md:p-8 space-y-4 text-sm md:text-base text-gray-700">
                             <p>
