@@ -31,7 +31,7 @@ const features = [
     },
     {
         icon: ShieldCheck,
-        title: '月額3万円（税別）・初期費用0円',
+        title: '月額3万円（税別）\n・初期費用0円',
         body: '個別見積もりではなく、月額固定だから予算化しやすい一律料金。今なら初期導入費用は無料（期間限定）。無理なく続けられます。',
     },
 ];
@@ -160,7 +160,7 @@ export default function BrochurePage() {
                         {features.map((f, i) => (
                             <div key={i} className="bg-blue-50 rounded-xl p-4">
                                 <f.icon className="w-6 h-6 text-blue-600 mb-2" />
-                                <h3 className="text-sm font-bold text-blue-700 mb-1">{f.title}</h3>
+                                <h3 className="text-sm font-bold text-blue-700 mb-1 whitespace-pre-line">{f.title}</h3>
                                 <p className="text-xs text-gray-600 leading-relaxed">{f.body}</p>
                             </div>
                         ))}

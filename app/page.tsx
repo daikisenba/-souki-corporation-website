@@ -142,7 +142,7 @@ const TechCard = ({ icon: Icon, title, description, delay }: {
                     <Icon className="w-8 h-8 text-white" />
                 </motion.div>
                 <h3 className="text-xl font-bold text-blue-700 mb-3 text-center">{title}</h3>
-                <p className="text-gray-600 text-center leading-relaxed">{description}</p>
+                <p className="text-gray-600 text-center leading-relaxed whitespace-pre-line">{description}</p>
 
                 {/* ホバー時の光効果 */}
                 <motion.div
@@ -363,9 +363,9 @@ export default function Home() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-base md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug"
+                            className="text-base md:text-2xl text-[#0B63F6] font-semibold mb-2 font-sans leading-snug whitespace-pre-line"
                         >
-                            中小企業のためのAI入札秘書（月額3万円）
+                            {"中小企業のためのAI入札秘書\n（月額3万円）"}
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, y: -20 }}
@@ -547,7 +547,7 @@ export default function Home() {
                         <TechCard
                             icon={Zap}
                             title="自動化"
-                            description="RPAとAIを組み合わせた業務プロセス自動化"
+                            description={"RPAとAIを組み合わせた\n業務プロセス自動化"}
                             delay={0.4}
                         />
                     </div>

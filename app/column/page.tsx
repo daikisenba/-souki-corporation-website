@@ -55,7 +55,7 @@ function ColumnCard({ col, featured = false }: { col: ColumnMeta; featured?: boo
                     {formatMonth(col.date)}
                 </time>
             )}
-            <h2 className="text-xl md:text-2xl font-bold text-blue-700 mt-1 mb-2">{col.title}</h2>
+            <h2 className="text-xl md:text-2xl font-bold text-blue-700 mt-1 mb-2 text-balance">{col.title}</h2>
             <p className="text-gray-600 text-sm md:text-base line-clamp-2">{col.description}</p>
             <span className="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm mt-4">
                 続きを読む <ArrowRight className="w-4 h-4" />
